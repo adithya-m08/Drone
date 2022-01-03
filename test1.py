@@ -5,7 +5,7 @@ from pymavlink import mavutil
 import time
 import argparse  
 parser = argparse.ArgumentParser()
-parser.add_argument('--connect', default='/dev/ttyACM0')
+parser.add_argument('--connect', default='127.0.0.1:14551')
 args = parser.parse_args()
 
 # Connect to the Vehicle
@@ -43,17 +43,19 @@ def arm_and_takeoff(aTargetAltitude):
     time.sleep(1)
 
 # Initialize the takeoff sequence to 5m
-arm_and_takeoff(5)
+arm_and_takeoff(20)
 print("Take off complete\n")
 
+time.sleep(10)
+
 print("Circle\n")
-vehicle.parameters["CIRCLE_RADIUS"] = 10
-vehicle.mode = VehicleMode("CIRCLE")
+vehicle.parameters["CIRCLE_RADIUS"] = 500
+vehicle.mode = VehicleMode("AUTO")
 time.sleep(60)
 
 print("Return to launch\n")
 vehicle.parameters["RTL_ALT"] = 0
 vehicle.mode = VehicleMode("RTL")
-
+time,s
 # Close vehicle object
 vehicle.close()
