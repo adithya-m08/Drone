@@ -1,6 +1,6 @@
 # track hands and move drone
 
-from dronekit import connect, VehicleMode, LocationGlobalRelative, LocationGlobal
+from dronekit import *
 from pymavlink import mavutil
 import time
 import math
