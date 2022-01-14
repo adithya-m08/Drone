@@ -12,7 +12,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--connect", default="127.0.0.1:14551")
 args = parser.parse_args()
 
-cap=cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0)
 
 # Connect to the Vehicle
 print("Connecting to vehicle on: %s" % args.connect)
@@ -91,5 +91,31 @@ def goto(dNorth, dEast, gotoFunction=vehicle.simple_goto):
             break
         time.sleep(2)
 
-arm_and_takeoff(10)
 
+arm_and_takeoff(20)
+print("Take off complete\n")
+# detector = ht.handDetector()
+# prevpos = 0
+# while True:
+#     _, img = cap.read()
+#     img = cv2.flip(img, 1)
+#     img = detector.findHands(img)
+#     lmList = detector.findPosition(img)
+#     if len(lmList) != 0:
+#         newpos = ((lmList[6][1] + lmList[18][1]) / 20) - 8
+#         if abs(newpos - prevpos) > 0.05:
+#             change = (newpos - prevpos) * 5
+#             print(change)
+#             #goto(0, change)
+#             prevpos = newpos
+
+#     cv2.imshow("Image", img)
+#     cv2.waitKey(1)
+
+goto(0, 10)
+goto(0, -10)
+
+print("Return to launch\n")
+vehicle.parameters["RTL_ALT"] = 0
+vehicle.mode = VehicleMode("RTL")
+vehicle.close()

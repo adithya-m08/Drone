@@ -56,6 +56,5 @@ time.sleep(60)
 print("Return to launch\n")
 vehicle.parameters["RTL_ALT"] = 0
 vehicle.mode = VehicleMode("RTL")
-time,s
 # Close vehicle object
 vehicle.close()
